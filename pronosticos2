@@ -1,0 +1,26 @@
+install.packages("fpp")
+library (fpp)
+pib <- read.csv ("C:\\Users\\SALA-C18\\Downloads\\PIB1.csv",header = F)
+pibts<- ts(pib [,2],start = 1993, frequency = 4)
+View(pibts)
+plot(pibts)
+Acf(pibts)
+
+pibpro<- meanf (pibts,4)
+plot(pibpro)
+pibnaive<- naive (pibts,4)
+plot(pibnaive)
+pibsnaive<-snaive(pibts,4)
+plot(pibsnaive)
+pibrwf<-rwf(pibts,4, drift = TRUE)
+plot(pibrwf)
+
+evalmed<-accuracy(pibpro)
+evaling<-accuracy(pibnaive)
+evalsnai<-accuracy(pibsnaive)
+evalder<-accuracy(pibrwf)
+
+evalmed
+evaling
+evalsnai
+evalder
